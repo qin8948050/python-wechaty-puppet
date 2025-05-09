@@ -101,7 +101,7 @@ class FileBox:
             'we suggest that you should use mediaType property'
         )
         return self.mediaType
-    
+
     @mimeType.setter
     def mimeType(self, value: str):
         logger.warn(
@@ -113,7 +113,7 @@ class FileBox:
     def type(self) -> FileBoxType:
         """get filebox type"""
         return FileBoxType(self._type)
-    
+
     async def ready(self):
         """
         sync the name from remote
@@ -255,10 +255,10 @@ class FileBox:
         """
         if not os.path.exists(path):
             raise FileNotFoundError(f'{path} file not found')
-        
+
         if name is None:
             name = os.path.basename(path)
-        
+
         # 1. check the audio related code
         if name.endswith('.silk') or name.endswith('.slk'):
             logger.warn('detect that you want to send voice file which should be <name>.sil pattern. So we help you rename it.')
@@ -275,7 +275,7 @@ class FileBox:
         # if sending the voice file, the mediaType must be: 'audio/silk'
         if file_box.name.endswith('.sil'):
             file_box.mediaType = 'audio/silk'
-            
+
             if not file_box.metadata or not file_box.metadata.get('voiceLength', None):
                 logger.warn(
                     'detect that you want to send voice file, but no voiceLength setting, '
@@ -371,7 +371,7 @@ class FileBox:
             )
         elif json_obj['boxType'] == FileBoxType.Url.value:
             file_box = FileBox.from_url(
-                url=json_obj['remoteUrl'],
+                url=json_obj['url'],
                 name=json_obj['name']
             )
         elif json_obj['boxType'] == FileBoxType.QRCode.value:
