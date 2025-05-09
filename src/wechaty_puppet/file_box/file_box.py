@@ -77,6 +77,7 @@ class FileBox:
         elif isinstance(options, FileBoxOptionsUrl):
             self.remoteUrl = options.url
             self.headers = options.headers
+            self.url=options.url
 
         elif isinstance(options, FileBoxOptionsStream):
             # TODO -> need to get into detail for stream sending
